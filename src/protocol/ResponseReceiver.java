@@ -12,6 +12,11 @@ public class ResponseReceiver {
     public void receiveLogInResult(DataInputStream inputStream) throws IOException {
 
         Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+
         if(header.code == 0x01)
             System.out.println("로그인 성공");
         else

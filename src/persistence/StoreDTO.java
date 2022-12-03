@@ -3,13 +3,16 @@ package persistence;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import protocol.MySerializableClass;
 
-import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 @Getter
 @Setter
 @ToString
-public class StoreDTO implements Serializable {
+public class StoreDTO implements MySerializableClass {
     private int store_id;
     private String user_id; //점주 누군지 확인용
     private String store_name;
@@ -100,4 +103,23 @@ public class StoreDTO implements Serializable {
     public void setStore_info(String store_info) {
         this.store_info = store_info;
     }
+
+    @Override
+    public byte[] getBytes() throws IOException {
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(buf);
+
+        dos.writeInt(store_id);
+        dos.writeUTF(user_id);
+        dos.writeUTF(store_name);
+        dos.writeUTF(store_phone);
+        dos.writeUTF(store_address);
+        dos.writeBoolean(store_state);
+        dos.writeInt(store_category);
+        dos.writeInt(store_rate);
+        dos.writeUTF(store_time);
+        dos.writeUTF(store_info);
+        return buf.toByteArray();
+    }
+
 }

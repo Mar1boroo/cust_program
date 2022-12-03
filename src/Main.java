@@ -29,11 +29,14 @@ public class Main {
 
             int command;
 
-            System.out.println("1. 로그인");
-//            System.out.println("2. Name 으로 Player 조회하기");
-//            System.out.println("3. Player 전체 조회하기");
-//            System.out.println("4. Team 전체 조회하기");
-            System.out.println("5. 종료");
+            System.out.println("1. 회원가입");
+            System.out.println("2. 로그인");
+            System.out.println("3. 개인 정보 및 비밀번호 수정");
+            System.out.println("4. 음식점 조회");
+            System.out.println("5. 음식 주문");
+            System.out.println("6. 주문 취소");
+            System.out.println("7. 주문 내역 조회");
+            System.out.println("8. 리뷰와 별점 등록");
             System.out.println("======================================");
             System.out.print("메뉴를 선택하세요 : ");
             command = s.nextInt();

@@ -1,8 +1,13 @@
 package persistence;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import protocol.MySerializableClass;
 
-import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class OrderDTO implements Serializable {
+public class OrderDTO implements MySerializableClass {
     private int order_id;
     private String user_id;
     private int store_id;
@@ -97,5 +102,20 @@ public class OrderDTO implements Serializable {
 
     public void setOrder_num(String order_num) {
         this.order_num = order_num;
+    }
+
+    @Override
+    public byte[] getBytes() throws IOException {
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(buf);
+
+        dos.writeInt(order_id);
+        dos.writeUTF(user_id);
+        dos.writeInt(store_id);
+        dos.writeLong(order_price);
+        dos.writeUTF(order_state);
+        dos.writeUTF(String.valueOf(order_orderTime)); // 받는 쪽에서 String -> LocalDateTime으로 변환해야함
+        dos.writeUTF(order_num);
+        return buf.toByteArray();
     }
 }

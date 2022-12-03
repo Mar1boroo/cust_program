@@ -17,7 +17,7 @@ public class RequestSender {
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(
-                Header.TYPE_REQ,
+                Header.TYPE_ANS,
                 Header.CODE_CUSTOMER_ID,
                 body.length
         );
@@ -39,7 +39,7 @@ public class RequestSender {
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(
-                Header.TYPE_REQ,
+                Header.TYPE_ANS,
                 Header.CODE_CUSTOMER_PW,
                 body.length
         );

@@ -1,17 +1,23 @@
 package persistence;
 
-import lombok.*;
-//import org.apache.ibatis.type.Alias;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.apache.ibatis.type.Alias;
+import protocol.MySerializableClass;
 
-import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-//@Alias("orderMenuList")
+@Alias("orderMenuList")
 
-public class OrderMenuDTO implements Serializable {
+public class OrderMenuDTO implements MySerializableClass {
     private String orderMenu_id;
     private String menu_name;
     private String order_num;
@@ -45,5 +51,16 @@ public class OrderMenuDTO implements Serializable {
 
     public String getMenu_name() {
         return menu_name;
+    }
+
+    @Override
+    public byte[] getBytes() throws IOException {
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(buf);
+
+        dos.writeUTF(orderMenu_id);
+        dos.writeUTF(menu_name);
+        dos.writeUTF(order_num);
+        return buf.toByteArray();
     }
 }
