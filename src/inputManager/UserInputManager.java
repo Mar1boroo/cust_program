@@ -15,17 +15,36 @@ public class UserInputManager {
     {
         UserDTO addUserDTO = new UserDTO();
 
+        String user_pw = inputUser_pw(sc);
         String user_name = inputUser_name(sc);
         String user_address = inputUser_address(sc);
         String user_phone = inputUser_phone(sc);
         int user_category = inputUser_category(sc);
 
+        addUserDTO.setUser_pw(user_pw);
         addUserDTO.setUser_name(user_name);
         addUserDTO.setUser_address(user_address);
         addUserDTO.setUser_phone(user_phone);
         addUserDTO.setUser_category(user_category);
 
         return addUserDTO;
+    }
+
+    private String inputUser_pw(Scanner sc)
+    {
+        String input = null;
+
+        while(true)
+        {
+            System.out.print("비밀번호를 입력하세요. : ");
+            input = sc.nextLine();
+
+            if(input.length() >= 3)
+                return input;
+            else
+                System.out.println("입력 형식에 맞지 않습니다(최소 세 글자). ");
+
+        }
     }
 
     private String inputUser_name(Scanner sc)

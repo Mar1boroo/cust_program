@@ -1,6 +1,6 @@
 package inputManager;
 
-import persistence.dto.StoreDTO;
+import persistence.StoreDTO;
 
 import java.util.Scanner;
 
