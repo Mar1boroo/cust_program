@@ -31,7 +31,7 @@ public class OrderController {
         long order_price = 0;
         int selectMenuNum = -1;
         int store_id;
-        String[] optionNames = {};
+        List<String> optionNames = new ArrayList<>();
 
         boolean continueFlag = false;
         //가게 선택하는 것입니다......
@@ -79,7 +79,26 @@ public class OrderController {
                 System.out.println();
 
                 requestSender.menuOptionListReq(menu_id, outputStream);
-                List<OptionDTO> optionList = null;
+                List<OptionDTO> optionList = responseReceiver.receiveOptionList(inputStream);
+
+                if(optionList.size() != 0)
+                {
+                    printMenuOption(optionList);
+                    System.out.print("메뉴의 옵션을 선택하세요(여러개 선택가능, 띄어쓰기로 구분, 옵션선택종료: 0): ");
+                    List<Integer> options = new ArrayList<>();
+                    int selectOptionNum = -1;
+                    do {
+                        selectOptionNum = sc.nextInt();
+                        if (selectOptionNum != 0)
+                            options.add(selectOptionNum);
+                    } while (selectOptionNum != 0);
+                    optionNames = getOptionName(optionList, options);
+                    order_price = order_price + getOptionPrice(optionList, options);
+                }
+
+                String order_num = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss-")) + user_id; // 주문번호 생성
+                if(menuCnt == 0)
+
             }
         }
 
@@ -191,6 +210,39 @@ public class OrderController {
             return -1;
         }
         return menuList.get(selectMenuNum - 1).getMenu_id();
+    }
+
+    public void printMenuOption(List<OptionDTO> optionList)
+    {
+        System.out.println("=================옵션 목록===================");
+        if(optionList.size() == 0)
+            System.out.println("해당 메뉴에 옵션이 없습니다.");
+
+        else
+        {
+            int i = 0;
+            for(OptionDTO dto: optionList) {
+                System.out.println((i + 1) + ". " + dto.getOption_name() + " | " + dto.getOption_price() + "원");
+                i++;
+            }
+        }
+        System.out.println("============================================");
+    }
+
+    public List<String> getOptionName(List<OptionDTO> optionList, List<Integer> options)
+    {
+        List<String> optionName = new ArrayList<>();
+        for(int i = 0; i < options.size(); i++)
+            optionName.add(optionList.get(options.get(i) - 1).getOption_name());
+        return optionName;
+    }
+
+    public long getOptionPrice(List<OptionDTO> optionList, List<Integer> options)
+    {
+        long result = 0;
+        for(int i = 0; i < options.size(); i++)
+            result = result + optionList.get(options.get(i) - 1).getOption_price();
+        return result;
     }
 }
 
