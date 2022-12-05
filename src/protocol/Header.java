@@ -23,7 +23,7 @@ public class Header implements MySerializableClass {
     public final static byte CODE_INFO_AND_PW_FIX= 0x03;
     public final static byte CODE_STORE_LOOKUP = 0x04;
     public final static byte CODE_FOOD_ORDER = 0x05;
-    public final static byte CODE_ORDER_CANCLE = 0x06;
+    public final static byte CODE_ORDER_CANCEL = 0x06;
     public final static byte CODE_ORDER_LIST_LOOKUP = 0x07;
     public final static byte CODE_WRITE_REVIEW = 0x08;
 
@@ -60,6 +60,8 @@ public class Header implements MySerializableClass {
     public final static byte CODE_STORE_INFO = 0x52;
     public final static byte CODE_STORE_TIME = 0x53;
     public final static byte CODE_INSERT_ORDER = 0x54;
+
+    public final static byte CODE_FIXED_ORDER_DTO = 0x70;
 
     //TYPE : 0x03(RESULT) 일 때
     public final static byte CODE_SUCCESS = 0x01;
