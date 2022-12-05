@@ -30,11 +30,20 @@ public class LoginController {
         System.out.println("user_id 요청 받기");
 
         System.out.println("id 요청 받고 id 보내기");
-        //user_id보내기
         System.out.print("id :"); String user_id = sc.next();
 
         BodyMaker bodyMaker = new BodyMaker();
         bodyMaker.addStringBytes(user_id);
+
+        byte[] id_body = bodyMaker.getBody();
+        Header id_Header = new Header(
+                Header.TYPE_ANS,
+                Header.CODE_USER_ID,
+                id_body.length);
+        outputStream.write(id_Header.getBytes());
+        outputStream.write(id_body);
+
+
 
         Header id_result_header = Header.readHeader(inputStream);
         byte[] id_result_body = new byte[id_result_header.length];

@@ -55,6 +55,9 @@ public class SignUpController {
                 userBody.length);
         outputStream.write(userHeader.getBytes());
         outputStream.write(userBody);
+
+
+
     }
 
 }
