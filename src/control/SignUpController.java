@@ -40,7 +40,11 @@ public class SignUpController {
         System.out.print("전화번호 : ");String phone = sc.next();
         System.out.print("고객 유형 ( 1: 점주 , 2 : 고객 ) :"); int user_category = sc.nextInt();
 
-        UserDTO u = new UserDTO(user_id, user_pw, user_name, user_address, phone, user_category);
+        UserDTO u;
+        if (user_category==2) {
+             u = new UserDTO(user_id, user_pw, user_name, user_address, phone, user_category, true);
+        } else
+             u = new UserDTO(user_id,user_pw,user_name,user_address,phone,user_category);
         BodyMaker bodyMaker = new BodyMaker();
         bodyMaker.add(u);
 
