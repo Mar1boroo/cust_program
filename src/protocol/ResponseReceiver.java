@@ -3,9 +3,13 @@ package protocol;
 //import persistence.Player;
 //import persistence.Team;
 
+import persistence.OrderMenuDTO;
+import persistence.StoreDTO;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class ResponseReceiver {
 
@@ -67,6 +71,20 @@ public class ResponseReceiver {
 //        }
 //
 //    }
+
+    public void receiveStoreList(DataInputStream inputStream) throws IOException
+    {
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        List<StoreDTO> storeDTOs = null;
+        int size = bodyReader.readInt();
+
+        for(int i = 0; i < size; i++)
+            storeDTOs.add(StoreDTO.read(bodyReader));
+    }
 
 
 }

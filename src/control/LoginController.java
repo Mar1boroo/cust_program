@@ -17,12 +17,8 @@ public class LoginController {
     public void handleLogin(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
 
         //시작 신호 보내기
-        Header start_Header = new Header(
-                Header.TYPE_START,
-                Header.CODE_LOG_IN,
-                0);
+        Header start_Header = new Header( Header.TYPE_START, Header.CODE_LOG_IN, 0);
         outputStream.write(start_Header.getBytes());
-        System.out.println("시작신호 보내기");
 
         Header id_header = Header.readHeader(inputStream);
         byte[] body = new byte[id_header.length];
