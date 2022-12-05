@@ -136,6 +136,15 @@ public class ResponseSender {
         UserInputManager addUserInfoManager = new UserInputManager(s);
         UserDTO addUserInfo = addUserInfoManager.getAddUserInfo();
 
+        switch(addUserInfo.getUser_category())
+        {
+            case 2:
+                addUserInfo.setUser_state(true);
+                break;
+            default:
+                break;
+        }
+
         BodyMaker bodyMaker = new BodyMaker();
         bodyMaker.add(addUserInfo);
 
