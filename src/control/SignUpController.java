@@ -2,8 +2,6 @@ package control;
 
 import protocol.BodyMaker;
 import protocol.Header;
-import protocol.ResponseReceiver;
-import protocol.RequestSender;
 import persistence.UserDTO;
 
 import java.io.ByteArrayInputStream;
@@ -11,8 +9,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
-
-import static control.Controller.SIGN_UP;
 
 public class SignUpController {
 

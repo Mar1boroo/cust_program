@@ -1,12 +1,7 @@
 package control;
 
-import protocol.BodyMaker;
-import protocol.Header;
-import protocol.ResponseReceiver;
-import protocol.RequestSender;
-import persistence.UserDTO;
+import protocol.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

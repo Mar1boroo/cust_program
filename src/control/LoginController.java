@@ -2,11 +2,7 @@ package control;
 
 import protocol.BodyMaker;
 import protocol.Header;
-import protocol.ResponseReceiver;
-import protocol.RequestSender;
-import persistence.UserDTO;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -27,6 +23,7 @@ public class LoginController {
         Header id_header = Header.readHeader(inputStream);
         byte[] body = new byte[id_header.length];
         inputStream.read(body);
+
         System.out.println("user_id 요청 받기");
 
         System.out.println("id 요청 받고 id 보내기");
