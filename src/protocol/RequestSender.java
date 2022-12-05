@@ -5,6 +5,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class RequestSender {
+
+    public void storeMenuListReq(int store_id, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.addIntBytes(store_id);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_MENU_LIST, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
 /*
     public void sendUserIDReq(Scanner s, DataOutputStream outputStream) throws IOException {
 

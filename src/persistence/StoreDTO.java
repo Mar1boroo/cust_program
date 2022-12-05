@@ -25,6 +25,21 @@ public class StoreDTO implements MySerializableClass {
     private String store_time;
     private String store_info;
 
+    public StoreDTO(int store_id, String user_id, String store_name, String store_phone, String store_address, boolean store_state,
+                    int store_category, int store_rate, String store_time, String store_info)
+    {
+        this.store_id = store_id;
+        this.user_id = user_id;
+        this.store_name = store_name;
+        this.store_phone = store_phone;
+        this.store_address = store_address;
+        this.store_state = store_state;
+        this.store_category = store_category;
+        this.store_rate = store_rate;
+        this.store_time = store_time;
+        this.store_info = store_info;
+    }
+
     public int getStore_id() {
         return store_id;
     }
@@ -105,10 +120,21 @@ public class StoreDTO implements MySerializableClass {
         this.store_info = store_info;
     }
 
-    @Override
-    public StoreDTO read(DataInputStream bodyReader)
+    public static StoreDTO read(DataInputStream bodyReader) throws IOException
     {
-        String store_id;
+        int store_id = bodyReader.readInt();
+        String user_id = bodyReader.readUTF();
+        String store_name = bodyReader.readUTF();
+        String store_phone = bodyReader.readUTF();
+        String store_address = bodyReader.readUTF();
+        boolean store_state = bodyReader.readBoolean();
+        int store_category = bodyReader.readInt();
+        int store_rate = bodyReader.readInt();
+        String store_time = bodyReader.readUTF();
+        String store_info = bodyReader.readUTF();
+
+        return new StoreDTO(store_id, user_id, store_name, store_phone, store_address, store_state,
+                store_category, store_rate, store_time, store_info);
     }
 
     @Override

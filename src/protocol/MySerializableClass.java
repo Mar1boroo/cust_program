@@ -8,6 +8,4 @@ import java.io.IOException;
 
 public interface MySerializableClass {
     public byte[] getBytes() throws IOException;
-
-    public Object read();
 }

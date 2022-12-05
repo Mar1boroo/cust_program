@@ -6,6 +6,7 @@ import lombok.ToString;
 import protocol.MySerializableClass;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -19,6 +20,18 @@ public class MenuDTO implements MySerializableClass {
     private long menu_price;
     private int menu_quantity;
     private String menu_category;
+
+    public MenuDTO() {}
+
+    public MenuDTO(int menu_id, String menu_name, int store_id, long menu_price, int menu_quantity, String menu_category)
+    {
+        this.menu_id = menu_id;
+        this.menu_name = menu_name;
+        this.store_id = store_id;
+        this.menu_price = menu_price;
+        this.menu_quantity = menu_quantity;
+        this.menu_category = menu_category;
+    }
 
     public int getMenu_id() {
         return menu_id;
@@ -66,6 +79,18 @@ public class MenuDTO implements MySerializableClass {
 
     public void setMenu_category(String menu_category) {
         this.menu_category = menu_category;
+    }
+
+    public static MenuDTO read(DataInputStream bodyReader) throws IOException
+    {
+        int menu_id = bodyReader.readInt();
+        String menu_name = bodyReader.readUTF();
+        int store_id = bodyReader.readInt();
+        long menu_price = bodyReader.readLong();
+        int menu_quantity = bodyReader.readInt();
+        String menu_category = bodyReader.readUTF();
+
+        return new MenuDTO(menu_id, menu_name, store_id, menu_price, menu_quantity, menu_category);
     }
 
     @Override

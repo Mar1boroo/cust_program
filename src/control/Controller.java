@@ -21,6 +21,9 @@ public class Controller {
 
     SignUpController signUpController = new SignUpController();
     LoginController loginController = new LoginController();
+    OrderController orderController = new OrderController();
+
+    String user_id;
 
     public boolean handleCommand(int command, Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
 
@@ -44,6 +47,9 @@ public class Controller {
             case INQUIRE_STORE:
                 //
                 break;
+
+            case ORDER:
+                orderController.handleOrder(sc, inputStream, outputStream, user_id);
 
             case QUIT:
                 Header quitHeader = new Header(

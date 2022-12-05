@@ -218,7 +218,7 @@ public class ResponseReceiver {
         String menu_category = bodyReader.readUTF();
     }
 
-    public void receiveMenuList(DataInputStream inputStream) throws IOException {
+    public List<MenuDTO> receiveMenuList(DataInputStream inputStream) throws IOException {
         Header header = Header.readHeader(inputStream);
         byte[] body = new byte[header.length];
         inputStream.read(body);
@@ -227,9 +227,10 @@ public class ResponseReceiver {
         List<MenuDTO> menuDTOs = null;
         int size = bodyReader.readInt();
 
-        for(int i=0; i<size; i++) {
-            menuDTOs.add(MenuDTO.readMenu(bodyReader));
-        }
+        for(int i = 0; i < size; i++)
+            menuDTOs.add(MenuDTO.read(bodyReader));
+
+        return menuDTOs;
     }
 
     public void receiveOptionID(DataInputStream inputStream) throws IOException {
@@ -383,7 +384,7 @@ public class ResponseReceiver {
 //
 //    }
 
-    public void receiveStoreList(DataInputStream inputStream) throws IOException
+    public List<StoreDTO> receiveStoreList(DataInputStream inputStream) throws IOException
     {
         Header header = Header.readHeader(inputStream);
         byte[] body = new byte[header.length];
@@ -395,6 +396,8 @@ public class ResponseReceiver {
 
         for(int i = 0; i < size; i++)
             storeDTOs.add(StoreDTO.read(bodyReader));
+
+        return storeDTOs;
     }
 
 
