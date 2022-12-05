@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Socket socket = new Socket("127.0.0.1", 3000);
+        //192.168.227.206
 
         System.out.println("connected.");
 
