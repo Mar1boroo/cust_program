@@ -13,7 +13,7 @@ public class LoginController {
         ResponseSender responseSender = new ResponseSender();
         ResponseReceiver responseReceiver = new ResponseReceiver();
         RequestSender requestSender = new RequestSender();
-        Scanner s = new Scanner(System.in);
+        RequestReceiver requestReceiver = new RequestReceiver();
         //시작 신호 보내기
         Header start_Header = new Header(
                 Header.TYPE_START,
@@ -22,9 +22,9 @@ public class LoginController {
         outputStream.write(start_Header.getBytes());
         System.out.println("시작신호 보내기");
 
-        responseReceiver.receiveUserID(inputStream); //id 요청 받기
+        if(requestReceiver.receiveUserIDReq(inputStream)) //id 요청 받기
+            responseSender.sendUserIDAns(sc, outputStream); //id 요청 받고 id 보내기
 
-        responseSender.sendUserIDAns(s, outputStream); //id 요청 받고 id 보내기
 
 
 
