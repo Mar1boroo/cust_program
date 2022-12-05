@@ -3,19 +3,31 @@ package persistence;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import protocol.MySerializableClass;
 
-import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 @Getter
 @Setter
 @ToString
-public class UserDTO implements Serializable {
+public class UserDTO implements MySerializableClass{
     private String user_id;
     private String user_pw;
     private String user_name;
     private String user_address;
     private String user_phone;
     private int user_category;
+
+    public UserDTO(String user_id, String user_pw, String user_name, String user_address, String phone, int user_category) {
+        this.user_id = user_id;
+        this.user_pw = user_pw;
+        this.user_name = user_name;
+        this.user_address = user_address;
+        this.user_phone = phone;
+        this.user_category = user_category;
+    }
 
     public String getUser_id() {
         return user_id;
@@ -63,5 +75,19 @@ public class UserDTO implements Serializable {
 
     public void setUser_category(int user_category) {
         this.user_category = user_category;
+    }
+
+    @Override
+    public byte[] getBytes() throws IOException {
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(buf);
+
+        dos.writeUTF(user_id);
+        dos.writeUTF(user_pw);
+        dos.writeUTF(user_name);
+        dos.writeUTF(user_address);
+        dos.writeUTF(user_phone);
+        dos.writeInt(user_category);
+        return buf.toByteArray();
     }
 }

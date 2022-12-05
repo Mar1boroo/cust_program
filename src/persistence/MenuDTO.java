@@ -3,13 +3,16 @@ package persistence;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import protocol.MySerializableClass;
 
-import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 @Getter
 @Setter
 @ToString
-public class MenuDTO implements Serializable {
+public class MenuDTO implements MySerializableClass {
     private int menu_id;
     private String menu_name;
     private int store_id;
@@ -63,5 +66,19 @@ public class MenuDTO implements Serializable {
 
     public void setMenu_category(String menu_category) {
         this.menu_category = menu_category;
+    }
+
+    @Override
+    public byte[] getBytes() throws IOException {
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(buf);
+
+        dos.writeInt(menu_id);
+        dos.writeUTF(menu_name);
+        dos.writeInt(store_id);
+        dos.writeLong(menu_price);
+        dos.writeInt(menu_quantity);
+        dos.writeUTF(menu_category);
+        return buf.toByteArray();
     }
 }

@@ -17,8 +17,8 @@ public class RequestSender {
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(
-                Header.TYPE_REQ,
-                Header.CODE_CUSTOMER_ID,
+                Header.TYPE_ANS,
+                Header.CODE_USER_ID,
                 body.length
         );
 
@@ -39,8 +39,8 @@ public class RequestSender {
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(
-                Header.TYPE_REQ,
-                Header.CODE_CUSTOMER_PW,
+                Header.TYPE_ANS,
+                Header.CODE_USER_PW,
                 body.length
         );
         outputStream.write(header.getBytes());
