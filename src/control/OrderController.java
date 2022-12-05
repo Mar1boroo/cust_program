@@ -1,9 +1,6 @@
 package control;
 
-import persistence.MenuDTO;
-import persistence.OptionDTO;
-import persistence.OrderDTO;
-import persistence.StoreDTO;
+import persistence.*;
 import protocol.Header;
 import protocol.RequestSender;
 import protocol.ResponseReceiver;
@@ -103,11 +100,14 @@ public class OrderController {
                 if(menuCnt == 0)
                     requestSender.insertOrderReq(order, outputStream);
 
+                requestSender.updateMenuQuantity(menu_id, outputStream);
+                String menu_name = menuList.get(selectMenuNum - 1).getMenu_name();
+                insertOrderMenuAndOption(order_num, menu_name, menuCnt, optionNames);
+                System.out.println();
+                System.out.println(menu_name + "에 대한 주문이 완료되었습니다.");
+                System.out.println(); menuCnt++;
             }
         }
-
-
-
         return -1;
     }
 
@@ -247,6 +247,18 @@ public class OrderController {
         for(int i = 0; i < options.size(); i++)
             result = result + optionList.get(options.get(i) - 1).getOption_price();
         return result;
+    }
+
+    public void insertOrderMenuAndOption(String order_num, String menu_name, int menuCnt, List<String> optionNames)
+    {
+        String orderMenu_id = order_num + "-" + menuCnt;
+        OrderMenuDTO orderMenuDTO = new OrderMenuDTO(orderMenu_id, order_num, menu_name);
+
+        OrderOptionDTO orderOptionDTO;
+        for(int j = 0; j < optionNames.size(); j++)
+        {
+            orderOptionDTO = new OrderOptionDTO(orderMenu_id, optionNames.get(j));
+        }
     }
 }
 

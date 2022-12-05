@@ -1,6 +1,8 @@
 package protocol;
 
 import persistence.OrderDTO;
+import persistence.OrderMenuDTO;
+import persistence.OrderOptionDTO;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -41,6 +43,40 @@ public class RequestSender {
         outputStream.write(header.getBytes());
         outputStream.write(body);
     }
+
+    public void insertOrderMenuReq(OrderMenuDTO orderMenu, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.add((MySerializableClass) orderMenu);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_ORDER_MENU, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
+
+    public void insertOrderOptionReq(OrderOptionDTO orderOption, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.add((MySerializableClass) orderOption);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_ORDER_OPTION, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
+
+    public void updateMenuQuantity(int menu_id, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.addIntBytes(menu_id);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_UPDATE_MENU_QUANTITY, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
+
 /*
     public void sendUserIDReq(Scanner s, DataOutputStream outputStream) throws IOException {
 
