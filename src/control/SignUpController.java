@@ -16,7 +16,7 @@ import static control.Controller.SIGN_UP;
 
 public class SignUpController {
 
-    public void handleSignUp( Scanner s, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
+    public void handleSignUp( Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
 
         Header header = Header.readHeader(inputStream);
         byte[] body = new byte[header.length];
@@ -28,15 +28,15 @@ public class SignUpController {
 
             case Header.TYPE_REQ:
                 System.out.print("사용할 id :");
-                String user_id = s.next();
+                String user_id = sc.next();
                 System.out.print("사용할 pw :");
-                String user_pw = s.next();
+                String user_pw = sc.next();
                 System.out.print("이름 : ");
-                String user_name = s.next();
+                String user_name = sc.next();
                 System.out.print("주소 : ");
-                String user_address = s.next();
+                String user_address = sc.next();
                 System.out.print("전화번호 : ");
-                String phoen = s.next();
+                String phoen = sc.next();
 
                 UserDTO u = new UserDTO(user_id, user_pw, user_name, user_address, phoen, 1);
                 BodyMaker bodyMaker = new BodyMaker();

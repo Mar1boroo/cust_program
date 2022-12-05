@@ -1,4 +1,5 @@
 import control.Controller;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class Main {
         DataInputStream is = new DataInputStream(socket.getInputStream());
         DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 
-        Scanner s = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("======================================");
         System.out.println("=============고객 프로그램==============");
@@ -37,11 +38,12 @@ public class Main {
             System.out.println("6. 주문 취소");
             System.out.println("7. 주문 내역 조회");
             System.out.println("8. 리뷰와 별점 등록");
+            System.out.println("9. 종료");
             System.out.println("======================================");
             System.out.print("메뉴를 선택하세요 : ");
-            command = s.nextInt();
+            command = sc.nextInt();
 
-            isContinue = controller.handleCommand(command, s, is, os);
+            isContinue = controller.handleCommand(command, sc, is, os);
 
             System.out.println("======================================");
 

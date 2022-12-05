@@ -7,12 +7,28 @@ import java.io.IOException;
 
 public class Header implements MySerializableClass {
 
-    public final static byte UNUSED = 0;
+    public final static byte UNUSED = -1;
 
+    /* TYPE */
+public final static byte TYPE_START = 0x00;
     public final static byte TYPE_REQ = 0x01;
     public final static byte TYPE_ANS = 0x02;
     public final static byte TYPE_RES = 0x03;
+    public static final byte TYPE_QUIT = 0x04;
 
+    /* CODE */
+    //TYPE : 0x00 (START) 일 때
+    public final static byte CODE_SIGN_UP = 0x01;
+    public final static byte CODE_LOG_IN = 0x02;
+    public final static byte CODE_INFO_AND_PW_FIX= 0x03;
+    public final static byte CODE_STORE_LOOKUP = 0x04;
+    public final static byte CODE_FOOD_ORDER = 0x05;
+    public final static byte CODE_ORDER_CANCLE = 0x06;
+    public final static byte CODE_ORDER_LIST_LOOKUP = 0x07;
+    public final static byte CODE_WRITE_REVIEW = 0x01;
+
+
+    //TYPE : 0x01(REQUEST) or 0x02(ANSWER) 일 때
     public final static byte CODE_CUSTOMER_ID = 0x01; // 타입 0x03 일때는 -> 성공
     public final static byte CODE_CUSTOMER_PW = 0x02; // 타입 0x03 일때는 -> 실패
     public final static byte CODE_CUSTOMER_NAME = 0x03; // 타입 0x03 일때는 -> 실패
@@ -40,6 +56,10 @@ public class Header implements MySerializableClass {
     public final static byte CODE_STORE_OPENING_HOURS = 0x2F ;   public final static byte CODE_STATISTICS_LIST = 0x30;
 
     public final static byte CODE_USER_DTO = 0x50;
+
+    //TYPE : 0x03(RESULT) 일 때
+    public final static byte CODE_SUCCESS = 0x01;
+    public final static byte CODE_FAIL = 0x02;
 
 
     public byte type;

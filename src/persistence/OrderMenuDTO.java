@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.ibatis.type.Alias;
 import protocol.MySerializableClass;
 
 import java.io.ByteArrayOutputStream;
@@ -15,7 +14,6 @@ import java.io.IOException;
 @Setter
 @ToString
 @NoArgsConstructor
-@Alias("orderMenuList")
 
 public class OrderMenuDTO implements MySerializableClass {
     private String orderMenu_id;
