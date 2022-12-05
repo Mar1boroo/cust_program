@@ -507,17 +507,15 @@ public class ResponseSender {
 
  */
 
-    public void sendMenuInfoAns(Scanner s, DataOutputStream outputStream) throws IOException {
+    public void sendMenuInfoAns(DataOutputStream outputStream) throws IOException {
 
         BodyMaker bodyMaker = new BodyMaker();
-        bodyMaker.addIntBytes(menu_id);
-
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(
                 Header.TYPE_ANS,
                 Header.CODE_MENU_ID,
-                body.length
+                0
         );
 
         outputStream.write(header.getBytes());

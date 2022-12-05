@@ -29,10 +29,12 @@ public class SignUpController {
         System.out.println("시작신호 보내기");
 
         if(requestReceiver.receiveUserIDReq(inputStream)) //user아이디 요청 받기
-            responseSender.sendUserIDAns(s, outputStream);//user아이디 요청 보내기
+            responseSender.sendUserIDAns(s, outputStream);//user아이디 보내기
         
         if((user_id = requestReceiver.receiveUserInfoReq(inputStream)) != "") //user정보 요청 받기
             responseSender.sendUserInfoAns(s,user_id, outputStream); //user정보 보내기
+        else
+            responseSender.sendUserIDAns(s, outputStream);
 
         if(requestReceiver.receiveResultReq(inputStream))
             System.out.println("회원가입이 완료되었습니다.");
