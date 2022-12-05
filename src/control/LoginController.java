@@ -1,12 +1,7 @@
 package control;
 
-import protocol.BodyMaker;
-import protocol.Header;
-import protocol.ResponseReceiver;
-import protocol.RequestSender;
-import persistence.UserDTO;
+import protocol.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,29 +10,17 @@ import java.util.Scanner;
 public class LoginController {
 
     public void handleLogin(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
-
+        ResponseSender responseSender = new ResponseSender();
+        ResponseReceiver responseReceiver = new ResponseReceiver();
+        RequestSender requestSender = new RequestSender();
+        RequestReceiver requestReceiver = new RequestReceiver();
         //시작 신호 보내기
         Header start_Header = new Header( Header.TYPE_START, Header.CODE_LOG_IN, 0);
         outputStream.write(start_Header.getBytes());
 
-        Header id_header = Header.readHeader(inputStream);
-        byte[] body = new byte[id_header.length];
-        inputStream.read(body);
-        System.out.println("user_id 요청 받기");
+        if(requestReceiver.receiveUserIDReq(inputStream)) //id 요청 받기
+            responseSender.sendUserIDAns(sc, outputStream); //id 요청 받고 id 보내기
 
-        System.out.println("id 요청 받고 id 보내기");
-        System.out.print("id :"); String user_id = sc.next();
-
-        BodyMaker bodyMaker = new BodyMaker();
-        bodyMaker.addStringBytes(user_id);
-
-        byte[] id_body = bodyMaker.getBody();
-        Header id_Header = new Header(
-                Header.TYPE_ANS,
-                Header.CODE_USER_ID,
-                id_body.length);
-        outputStream.write(id_Header.getBytes());
-        outputStream.write(id_body);
 
 
 

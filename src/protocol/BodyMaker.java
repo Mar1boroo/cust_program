@@ -36,6 +36,14 @@ public class BodyMaker {
         dos.writeUTF(str);
     }
 
+    public void addBooleanBytes(boolean bool) throws IOException {
+        dos.writeBoolean(bool);
+    }
+
+    public void addLongBytes(long longData) throws IOException {
+        dos.writeLong(longData);
+    }
+
 
     public byte[] getBody() {
         return buf.toByteArray();

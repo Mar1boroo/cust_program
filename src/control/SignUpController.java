@@ -1,9 +1,6 @@
 package control;
 
-import protocol.BodyMaker;
-import protocol.Header;
-import protocol.ResponseReceiver;
-import protocol.RequestSender;
+import protocol.*;
 import persistence.UserDTO;
 
 import java.io.ByteArrayInputStream;
@@ -12,11 +9,26 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static control.Controller.SIGN_UP;
-
 public class SignUpController {
 
     public void handleSignUp( Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
+        ResponseSender responseSender = new ResponseSender();
+        ResponseReceiver responseReceiver = new ResponseReceiver();
+        RequestSender requestSender = new RequestSender();
+        Scanner s = new Scanner(System.in);
+
+        //시작 신호 보내기
+        Header startHeader = new Header(
+                Header.TYPE_START,
+                Header.CODE_SIGN_UP,
+                0);
+        outputStream.write(startHeader.getBytes());
+        System.out.println("시작신호 보내기");
+
+        responseSender.sendUserInfoAns(s, outputStream); //user정보 보내기
+
+
+/*
         //시작 신호 보내기
         Header startHeader = new Header(
                 Header.TYPE_START,
@@ -33,6 +45,7 @@ public class SignUpController {
 
         System.out.println("요청 받고 dto 보내기");
         //user_dto 보내기
+
         System.out.print("사용할 id :"); String user_id = sc.next();
         System.out.print("사용할 pw :");String user_pw = sc.next();
         System.out.print("이름 : ");String user_name = sc.next();
@@ -56,6 +69,9 @@ public class SignUpController {
                 userBody.length);
         outputStream.write(userHeader.getBytes());
         outputStream.write(userBody);
+
+ */
+
 
 
 
