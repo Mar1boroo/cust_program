@@ -19,6 +19,7 @@ public class UserDTO implements MySerializableClass{
     private String user_address;
     private String user_phone;
     private int user_category;
+    private boolean user_state;
 
     public UserDTO(String user_id, String user_pw, String user_name, String user_address, String phone, int user_category) {
         this.user_id = user_id;
@@ -28,6 +29,15 @@ public class UserDTO implements MySerializableClass{
         this.user_phone = phone;
         this.user_category = user_category;
     }
+    public UserDTO(String user_id, String user_pw, String user_name, String user_address, String phone, int user_category, boolean user_state) {
+           this.user_id = user_id;
+           this.user_pw = user_pw;
+           this.user_name = user_name;
+           this.user_address = user_address;
+           this.user_phone = phone;
+           this.user_category = user_category;
+           this.user_state=user_state;
+       }
 
     public String getUser_id() {
         return user_id;
