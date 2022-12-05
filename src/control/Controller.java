@@ -24,8 +24,8 @@ public class Controller {
     public static final int WRITE_REVIEW = 8;
     public static final int QUIT = 9;
 
-    SignUpController signUpController;
-    LoginController loginController;
+    SignUpController signUpController = new SignUpController();
+    LoginController loginController = new LoginController();
 
     public boolean handleCommand(int command, Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
 
