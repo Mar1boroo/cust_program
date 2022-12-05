@@ -429,4 +429,20 @@ public class RequestSender {
 
         outputStream.write(header.getBytes());
     }
+
+    public void sendUserIDCheck(String user_id, DataOutputStream outputStream) throws IOException {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.addStringBytes(user_id);
+
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(
+                Header.TYPE_REQ,
+                Header.CODE_REVIEW_ANS,
+                body.length
+        );
+
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
 }

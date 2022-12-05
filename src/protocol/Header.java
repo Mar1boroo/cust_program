@@ -54,6 +54,7 @@ public class Header implements MySerializableClass {
     public final static byte CODE_STORE_OPENING_HOURS = 0x2F ;   public final static byte CODE_STATISTICS_LIST = 0x30;
 
     public final static byte CODE_USER_DTO = 0x50;
+    public final static byte CODE_USER_INFO = 0x51;
 
     //TYPE : 0x03(RESULT) 일 때
     public final static byte CODE_SUCCESS = 0x01;

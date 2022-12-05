@@ -132,9 +132,10 @@ public class ResponseSender {
     }
 
     */
-    public void sendUserInfoAns(Scanner s,DataOutputStream outputStream) throws IOException {
+    public void sendUserInfoAns(Scanner s, String user_id,DataOutputStream outputStream) throws IOException {
         UserInputManager addUserInfoManager = new UserInputManager(s);
         UserDTO addUserInfo = addUserInfoManager.getAddUserInfo();
+        addUserInfo.setUser_id(user_id);
 
         switch(addUserInfo.getUser_category())
         {
