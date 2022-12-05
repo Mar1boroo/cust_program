@@ -16,6 +16,17 @@ public class RequestSender {
         outputStream.write(header.getBytes());
         outputStream.write(body);
     }
+
+    public void menuOptionListReq(int menu_id, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.addIntBytes(menu_id);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_OPTION_LIST, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
 /*
     public void sendUserIDReq(Scanner s, DataOutputStream outputStream) throws IOException {
 

@@ -1,6 +1,7 @@
 package control;
 
 import persistence.MenuDTO;
+import persistence.OptionDTO;
 import persistence.StoreDTO;
 import protocol.Header;
 import protocol.RequestSender;
@@ -76,6 +77,9 @@ public class OrderController {
             {
                 order_price = order_price + menuList.get(selectMenuNum - 1).getMenu_price();
                 System.out.println();
+
+                requestSender.menuOptionListReq(menu_id, outputStream);
+                List<OptionDTO> optionList = null;
             }
         }
 
