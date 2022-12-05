@@ -6,6 +6,7 @@ import lombok.ToString;
 import protocol.MySerializableClass;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -102,6 +103,12 @@ public class StoreDTO implements MySerializableClass {
 
     public void setStore_info(String store_info) {
         this.store_info = store_info;
+    }
+
+    @Override
+    public StoreDTO read(DataInputStream bodyReader)
+    {
+        String store_id;
     }
 
     @Override
