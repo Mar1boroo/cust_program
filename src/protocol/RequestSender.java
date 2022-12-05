@@ -18,7 +18,7 @@ public class RequestSender {
 
         Header header = new Header(
                 Header.TYPE_ANS,
-                Header.CODE_CUSTOMER_ID,
+                Header.CODE_USER_ID,
                 body.length
         );
 
@@ -40,7 +40,7 @@ public class RequestSender {
 
         Header header = new Header(
                 Header.TYPE_ANS,
-                Header.CODE_CUSTOMER_PW,
+                Header.CODE_USER_PW,
                 body.length
         );
         outputStream.write(header.getBytes());
