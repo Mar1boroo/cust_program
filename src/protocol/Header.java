@@ -60,6 +60,7 @@ public class Header implements MySerializableClass {
     public final static byte CODE_STORE_INFO = 0x52;
     public final static byte CODE_STORE_TIME = 0x53;
     public final static byte CODE_INSERT_ORDER = 0x54;
+    public final static byte CODE_UPDATE_MENU_QUANTITY = 0x55;
 
     //TYPE : 0x03(RESULT) 일 때
     public final static byte CODE_SUCCESS = 0x01;

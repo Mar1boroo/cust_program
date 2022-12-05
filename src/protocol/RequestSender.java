@@ -1,5 +1,8 @@
 package protocol;
 
+import persistence.OrderDTO;
+
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -24,6 +27,17 @@ public class RequestSender {
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(Header.TYPE_REQ, Header.CODE_OPTION_LIST, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
+
+    public void insertOrderReq(OrderDTO order, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.add((MySerializableClass) order);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_ORDER, body.length);
         outputStream.write(header.getBytes());
         outputStream.write(body);
     }

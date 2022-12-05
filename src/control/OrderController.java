@@ -2,6 +2,7 @@ package control;
 
 import persistence.MenuDTO;
 import persistence.OptionDTO;
+import persistence.OrderDTO;
 import persistence.StoreDTO;
 import protocol.Header;
 import protocol.RequestSender;
@@ -97,7 +98,10 @@ public class OrderController {
                 }
 
                 String order_num = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss-")) + user_id; // 주문번호 생성
+                OrderDTO order = new OrderDTO(user_id, store_id, order_price, LocalDateTime.now(), order_num);
+
                 if(menuCnt == 0)
+                    requestSender.insertOrderReq(order, outputStream);
 
             }
         }
