@@ -91,6 +91,17 @@ public class RequestSender {
         outputStream.write(body);
     }
 
+    public void updateOrderToCancel(int order_id, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.addIntBytes(order_id);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_CANCEL_ORDER, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
+
     public void sendUserInfoReq(DataOutputStream outputStream) throws IOException {
 
         Header header = new Header(

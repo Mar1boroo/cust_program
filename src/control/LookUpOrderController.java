@@ -47,7 +47,7 @@ public class LookUpOrderController {
         for(OrderDTO odtos : orderDTOList)
         {
             System.out.print((cnt + 1) + ". 가게명: " + findStoreName(odtos.getStore_id(), storeDTOList));
-            System.out.println(" | 총 주문금액: " + odtos.getOrder_price());
+            System.out.println(" | 총 주문금액: " + odtos.getOrder_price() + " | " + odtos.getOrder_state());
             subPrint(odtos.getOrder_num(), orderMenuDTOList, orderOptionDTOList);
             System.out.println();
             cnt++;
