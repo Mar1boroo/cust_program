@@ -419,4 +419,52 @@ public class ResponseReceiver {
 
         return storeReviewDTOS;
     }
+
+    public List<OrderDTO> receiveOrderList(DataInputStream inputStream) throws IOException
+    {
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        List<OrderDTO> orderDTOS = new ArrayList<>();
+        int size = bodyReader.readInt();
+
+        for(int i = 0; i < size; i++)
+            orderDTOS.add(OrderDTO.read(bodyReader));
+
+        return orderDTOS;
+    }
+
+    public List<OrderMenuDTO> receiveOrderMenuList(DataInputStream inputStream) throws IOException
+    {
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        List<OrderMenuDTO> orderMenuDTOS = new ArrayList<>();
+        int size = bodyReader.readInt();
+
+        for(int i = 0; i < size; i++)
+            orderMenuDTOS.add(OrderMenuDTO.read(bodyReader));
+
+        return orderMenuDTOS;
+    }
+
+    public List<OrderOptionDTO> receiveOrderOptionList(DataInputStream inputStream) throws IOException
+    {
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        List<OrderOptionDTO> orderOptionDTOS = new ArrayList<>();
+        int size = bodyReader.readInt();
+
+        for(int i = 0; i < size; i++)
+            orderOptionDTOS.add(OrderOptionDTO.read(bodyReader));
+
+        return orderOptionDTOS;
+    }
 }

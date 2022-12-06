@@ -1,7 +1,5 @@
 package control;
 
-import persistence.MenuDTO;
-import persistence.StoreDTO;
 import persistence.StoreReviewDTO;
 import protocol.Header;
 import protocol.ResponseReceiver;

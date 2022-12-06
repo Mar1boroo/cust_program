@@ -7,6 +7,7 @@ import lombok.ToString;
 import protocol.MySerializableClass;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -31,24 +32,21 @@ public class OrderMenuDTO implements MySerializableClass {
         return order_num;
     }
 
-    public void setOrder_num(String order_num) {
-        this.order_num = order_num;
-    }
-
-    public void setMenu_name(String menu_name) {
-        this.menu_name = menu_name;
-    }
-
     public String getOrderMenu_id() {
         return orderMenu_id;
     }
 
-    public void setOrderMenu_id(String orderMenu_id) {
-        this.orderMenu_id = orderMenu_id;
-    }
-
     public String getMenu_name() {
         return menu_name;
+    }
+
+    public static OrderMenuDTO read(DataInputStream bodyReader) throws IOException
+    {
+        String orderMenu_id = bodyReader.readUTF();
+        String menu_name = bodyReader.readUTF();
+        String order_num = bodyReader.readUTF();
+
+        return new OrderMenuDTO(orderMenu_id, order_num, menu_name);
     }
 
     @Override

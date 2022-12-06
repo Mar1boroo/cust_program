@@ -78,10 +78,12 @@ public class RequestSender {
         outputStream.write(body);
     }
 
-    public void updateMenuQuantity(int menu_id, DataOutputStream outputStream) throws IOException
+    public void updateMenuQuantity(int menu_id, long order_price, String order_num, DataOutputStream outputStream) throws IOException
     {
         BodyMaker bodyMaker = new BodyMaker();
         bodyMaker.addIntBytes(menu_id);
+        bodyMaker.addLongBytes(order_price);
+        bodyMaker.addStringBytes(order_num);
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(Header.TYPE_REQ, Header.CODE_UPDATE_MENU_QUANTITY, body.length);

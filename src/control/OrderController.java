@@ -64,6 +64,7 @@ public class OrderController {
 
         //메뉴 선택. 메뉴를 잘못 선택하거나 수량이 없으면 메뉴를 다시 선택하도록 함.
         int menuCnt = 0;
+        String order_num = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss-")) + user_id;
         while(selectMenuNum != 0)
         {
             printStoreMenu(menuList, menuCategory);
@@ -77,12 +78,9 @@ public class OrderController {
             }
             int menu_id = selectMenu(menuList, selectMenuNum);
 
-            //옵션 선택을 위한 코드
             if(menu_id != -1)
             {
                 order_price = order_price + menuList.get(selectMenuNum - 1).getMenu_price();
-                System.out.println();
-
                 requestSender.menuOptionListReq(menu_id, outputStream);
                 List<OptionDTO> optionList = responseReceiver.receiveOptionList(inputStream);
                 //서버에서 해당 메뉴의 옵션 목록을 받아오기 위해 메뉴 아이디를 보내고 옵션 목록을 요청
@@ -90,6 +88,7 @@ public class OrderController {
                 //옵션이 있을 시 옵션 선택
                 if(optionList.size() != 0)
                 {
+                    System.out.println();
                     printMenuOption(optionList);
                     System.out.print("메뉴의 옵션을 선택하세요(여러개 선택가능, 띄어쓰기로 구분, 옵션선택종료: 0): ");
                     List<Integer> options = new ArrayList<>();
@@ -103,7 +102,6 @@ public class OrderController {
                     order_price = order_price + getOptionPrice(optionList, options);
                 }
 
-                String order_num = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss-")) + user_id;
                 OrderDTO order = new OrderDTO(user_id, store_id, order_price, LocalDateTime.now(), order_num);
                 //주문 구분을 위한 주문번호 생성, 주문 객체 생성
 
@@ -111,7 +109,7 @@ public class OrderController {
                     requestSender.insertOrderReq(order, outputStream);
                 //첫 메뉴 주문시에만 데이터베이스 주문 테이블에 주문을 넣는 것을 요청
 
-                requestSender.updateMenuQuantity(menu_id, outputStream);
+                requestSender.updateMenuQuantity(menu_id, order_price, order_num, outputStream);
                 //메뉴 수량 조정
                 String menu_name = menuList.get(selectMenuNum - 1).getMenu_name();
                 String orderMenu_id = order_num + "-" + menuCnt;
@@ -128,7 +126,6 @@ public class OrderController {
                 }
                 //데이터베이스의 주문옵션 테이블에 옵션을 넣는 것을 요청
 
-                System.out.println();
                 System.out.println(menu_name + "에 대한 주문이 완료되었습니다.");
                 System.out.println(); menuCnt++;
             }
@@ -141,10 +138,11 @@ public class OrderController {
     {
         int i = 0;
         System.out.println("-------------------------------------------------------");
-        for (StoreDTO dto : storeList) {
-            System.out.println((i + 1) + ". " + dto.getStore_name() + "  \"" + dto.getStore_info() + " \"" +
-                    "\n | 영업시간 : " + dto.getStore_time() + " \t| " + ((dto.getStore_state()) ? "(영업중)" : "(영업종료)") +
-                    "\n | 주소 : " + dto.getStore_address() + "\t| 매장 전화번호 : " + dto.getStore_phone());
+        for (StoreDTO dto : storeList)
+        {
+            System.out.println((i + 1) + ". " + storeList.get(i).getStore_name() + "  \"" + storeList.get(i).getStore_info() + "\""
+                    + "\n | 영업시간 : " + storeList.get(i).getStore_time() + " | 주소 : " + storeList.get(i).getStore_address()
+                    + " | 매장 전화번호 : " + storeList.get(i).getStore_phone() + " |");
             System.out.println("-------------------------------------------------------");
             i++;
         }
@@ -209,7 +207,7 @@ public class OrderController {
     //메뉴를 카테고리별로 출력하는 메소드
     public void printStoreMenu(List<MenuDTO> menuList, ArrayList<String> menuCategory)
     {
-        System.out.println("================메뉴 목록================");
+        System.out.println("================메뉴 목록================\n");
         for(int i = 0, j = 0; i < menuCategory.size(); i++)
         {
             System.out.println(menuCategory.get(i));
