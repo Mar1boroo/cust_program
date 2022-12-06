@@ -137,7 +137,11 @@ public class OrderController {
     public void printStoreList(List<StoreDTO> storeList)
     {
         int i = 0;
-        System.out.println("-------------------------------------------------------");
+        if(storeList.size() == 0)
+            System.out.println("주문 가능한 가게가 없습니다.");
+        else
+            System.out.println("-------------------------------------------------------");
+
         for (StoreDTO dto : storeList)
         {
             System.out.println((i + 1) + ". " + storeList.get(i).getStore_name() + "  \"" + storeList.get(i).getStore_info() + "\""

@@ -67,6 +67,10 @@ public class LookUpStoreController {
     public void printStore(List<StoreReviewDTO> storeReviewList, ArrayList<Integer> storeIds)
     {
         System.out.println("-------------------------가게 리스트--------------------------");
+
+        if(storeReviewList.size() == 0)
+            System.out.println("조회 가능한 가게가 없습니다.");
+
         for(int i = 0; i < storeIds.size(); i++)
         {
             int reviewCnt = 0;
