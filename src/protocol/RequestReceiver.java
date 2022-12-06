@@ -1,5 +1,7 @@
 package protocol;
 
+import persistence.UserDTO;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -43,7 +45,7 @@ public class RequestReceiver {
         return typeCheck && codeCheck;
     }
 
-    public String receiveUserIDResultReq(DataInputStream inputStream) throws IOException {
+    public String receiveUserIDResult_SignUpReq(DataInputStream inputStream) throws IOException {
 
         Header header = Header.readHeader(inputStream);
         byte[] body = new byte[header.length];
@@ -53,9 +55,63 @@ public class RequestReceiver {
         boolean typeCheck = (header.type == header.TYPE_RES) ? true : false;
         boolean codeCheck = (header.code == header.CODE_SUCCESS) ? true : false;
 
-        if(typeCheck && codeCheck)
-            return bodyReader.readUTF();
+        String user_id = bodyReader.readUTF();
+        if(typeCheck && codeCheck) {
+            return user_id;
+        }
 
         return "";
+    }
+
+    public String receiveUserIDResult_LogInReq(DataInputStream inputStream) throws IOException {
+
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        boolean typeCheck = (header.type == header.TYPE_RES) ? true : false;
+        boolean codeCheck = (header.code == header.CODE_FAIL) ? true : false;
+
+        String user_id = bodyReader.readUTF();
+        if(typeCheck && codeCheck) {
+            return user_id;
+        }
+
+        return "";
+    }
+
+    public UserDTO receiveUserPWResult_LogInReq(DataInputStream inputStream) throws IOException {
+
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        boolean typeCheck = (header.type == header.TYPE_RES) ? true : false;
+        boolean codeCheck = (header.code == header.CODE_SUCCESS) ? true : false;
+
+        if(typeCheck && codeCheck) {
+            return UserDTO.read(bodyReader);
+        }
+
+        return null;
+    }
+
+    public UserDTO receiveSignUpResult(DataInputStream inputStream) throws IOException {
+
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        boolean typeCheck = (header.type == header.TYPE_RES) ? true : false;
+        boolean codeCheck = (header.code == header.CODE_SUCCESS) ? true : false;
+
+        if(typeCheck && codeCheck) {
+            return UserDTO.read(bodyReader);
+        }
+
+        return null;
     }
 }

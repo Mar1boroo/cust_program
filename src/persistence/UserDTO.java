@@ -6,6 +6,7 @@ import lombok.ToString;
 import protocol.MySerializableClass;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -89,6 +90,18 @@ public class UserDTO implements MySerializableClass{
 
     public void setUser_category(int user_category) {
         this.user_category = user_category;
+    }
+
+
+    public static UserDTO read(DataInputStream bodyReader) throws IOException {
+        String user_id = bodyReader.readUTF();
+        String user_pw = bodyReader.readUTF();
+        String user_name = bodyReader.readUTF();
+        String user_address  = bodyReader.readUTF();
+        String user_phone = bodyReader.readUTF();
+        int user_category =bodyReader.readInt();
+        UserDTO userDTO = new UserDTO(user_id , user_pw, user_name , user_address , user_phone , user_category);
+        return userDTO;
     }
 
     @Override

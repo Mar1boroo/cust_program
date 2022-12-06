@@ -25,7 +25,7 @@ public class SignUpController {
     }
 
     public void handleSignUp(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
-
+        UserDTO signUpUser = new UserDTO();
         String user_id;
 
         //시작 신호 보내기
@@ -42,7 +42,7 @@ public class SignUpController {
 
         while(true)
         {
-            if((user_id = requestReceiver.receiveUserIDResultReq(inputStream)) != "")
+            if((user_id = requestReceiver.receiveUserIDResult_SignUpReq(inputStream)) != "")
                 break;
 
             System.out.println("아이디가 중복됩니다.");
@@ -50,8 +50,8 @@ public class SignUpController {
         }
         responseSender.sendUserInfoAns(sc,user_id, outputStream);
 
-        if(requestReceiver.receiveResultReq(inputStream))
-            System.out.println("회원가입이 완료되었습니다.");
+        if((signUpUser = requestReceiver.receiveSignUpResult(inputStream)) != null)
+            System.out.println(signUpUser.getUser_name() + "(" + signUpUser.getUser_id() + ")님 회원가입 되셨습니다.");
         else
             System.out.println("회원가입 실패.");
 
