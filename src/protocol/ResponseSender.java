@@ -1,19 +1,21 @@
 package protocol;
 
+import inputManager.StoreInputManager;
 import inputManager.UserInputManager;
 import persistence.*;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ResponseSender {
 
     public void sendUserIDAns(Scanner s, DataOutputStream outputStream) throws IOException {
-
+        Scanner sc = new Scanner(System.in);
         System.out.print("아이디를 입력하세요 : ");
-        String id = s.nextLine();
+        String id = sc.nextLine();
 
         BodyMaker bodyMaker = new BodyMaker();
         bodyMaker.addStringBytes(id);
@@ -28,14 +30,17 @@ public class ResponseSender {
 
         outputStream.write(header.getBytes());
         outputStream.write(body);
+        System.out.println("아이디 입력 보냄");
     }
 
-    public void sendUserPWAns(Scanner s, DataOutputStream outputStream) throws IOException {
+    public void sendUserPWAns(Scanner s,String user_id, DataOutputStream outputStream) throws IOException {
+        Scanner sc = new Scanner(System.in);
 
         System.out.print("비밀번호를 입력하세요 : ");
-        String pw = s.nextLine();
+        String pw = sc.nextLine();
 
         BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.addStringBytes(user_id);
         bodyMaker.addStringBytes(pw);
 
         byte[] body = bodyMaker.getBody();
@@ -132,7 +137,7 @@ public class ResponseSender {
 
     */
     public void sendUserInfoAns(Scanner s, String user_id,DataOutputStream outputStream) throws IOException {
-        UserInputManager addUserInfoManager = new UserInputManager(s);
+        UserInputManager addUserInfoManager = new UserInputManager();
         UserDTO addUserInfo = addUserInfoManager.getAddUserInfo();
         addUserInfo.setUser_id(user_id);
 
@@ -337,6 +342,25 @@ public class ResponseSender {
 
  */
 
+    public void sendStoreInfoAns(Scanner s, DataOutputStream outputStream) throws IOException { //가게 정보 입력 후 전송
+        StoreInputManager addStoreInfoManager = new StoreInputManager(s);
+        StoreDTO addStoreInfo = addStoreInfoManager.getAddStoreInfo();
+
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.add(addStoreInfo);
+
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(
+                Header.TYPE_ANS,
+                Header.CODE_STORE_INFO,//임시 코드 가게 정보 전송
+                body.length
+        );
+
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
+
     public void sendStoreSaleCountAns(StatisticalInfoDTO statisticalInfo, DataOutputStream outputStream) throws IOException {
 
         BodyMaker bodyMaker = new BodyMaker();
@@ -370,7 +394,7 @@ public class ResponseSender {
         outputStream.write(header.getBytes());
         outputStream.write(body);
     }
-
+*/
     public void sendStoreTimeAns(String time, DataOutputStream outputStream) throws IOException {
 
         BodyMaker bodyMaker = new BodyMaker();

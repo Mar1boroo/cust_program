@@ -25,6 +25,8 @@ public class StoreDTO implements MySerializableClass {
     private String store_time;
     private String store_info;
 
+    public StoreDTO(){}
+
     public StoreDTO(int store_id, String user_id, String store_name, String store_phone, String store_address, boolean store_state,
                     int store_category, int store_rate, String store_time, String store_info)
     {
