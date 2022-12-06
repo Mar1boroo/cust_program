@@ -11,7 +11,7 @@ public class Controller {
 
     public static final int SIGN_UP = 1;
     public static final int LOG_IN = 2;
-    public static final int INQUIRE_AND_PW_CHANGE = 3;
+    public static final int EDIT_INFORMATION = 3;
     public static final int INQUIRE_STORE = 4;
     public static final int ORDER = 5;
     public static final int ORDER_CANCLE = 6;
@@ -22,6 +22,7 @@ public class Controller {
     SignUpController signUpController = new SignUpController();
     LoginController loginController = new LoginController();
     OrderController orderController = new OrderController();
+    EditInformationController editInformationController = new EditInformationController();
 
     String user_id = "user1";
 
@@ -40,8 +41,8 @@ public class Controller {
                 loginController.handleLogin(sc,inputStream, outputStream);
                 break;
 
-            case INQUIRE_AND_PW_CHANGE:
-                //
+            case EDIT_INFORMATION:
+                editInformationController.handleOrder(sc, inputStream, outputStream, user_id);
                 break;
 
             case INQUIRE_STORE:

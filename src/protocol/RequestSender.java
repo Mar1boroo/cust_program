@@ -3,6 +3,7 @@ package protocol;
 import persistence.OrderDTO;
 import persistence.OrderMenuDTO;
 import persistence.OrderOptionDTO;
+import persistence.UserDTO;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,6 +11,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class RequestSender {
+
+    public void updateUserInfo(UserDTO user, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.add(user);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_UPDATE_USER_INFO, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
 
     public void storeMenuListReq(int store_id, DataOutputStream outputStream) throws IOException
     {

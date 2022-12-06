@@ -127,7 +127,6 @@ public class UserInputManager {
             if(!('0' <= tmp && tmp <= '9'))
                 return false;
         }
-
         return true;
     }
 
