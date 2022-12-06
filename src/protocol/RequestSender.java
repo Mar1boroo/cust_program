@@ -1,9 +1,6 @@
 package protocol;
 
-import persistence.OrderDTO;
-import persistence.OrderMenuDTO;
-import persistence.OrderOptionDTO;
-import persistence.UserDTO;
+import persistence.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,6 +8,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class RequestSender {
+
+    public void insertReviewReq(ReviewDTO review, DataOutputStream outputStream) throws IOException
+    {
+        BodyMaker bodyMaker = new BodyMaker();
+        bodyMaker.add(review);
+        byte[] body = bodyMaker.getBody();
+
+        Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_REVIEW, body.length);
+        outputStream.write(header.getBytes());
+        outputStream.write(body);
+    }
 
     public void updateUserInfo(UserDTO user, DataOutputStream outputStream) throws IOException
     {

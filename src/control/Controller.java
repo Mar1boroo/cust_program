@@ -26,6 +26,7 @@ public class Controller {
     LookUpStoreController lookUpStoreController = new LookUpStoreController();
     LookUpOrderController lookUpOrderController = new LookUpOrderController();
     OrderCancelController orderCancelController = new OrderCancelController();
+    WriteReviewController writeReviewController = new WriteReviewController();
 
     String user_id = "user1";
 
@@ -62,6 +63,10 @@ public class Controller {
 
             case INQUIRE_ORDER:
                 lookUpOrderController.handleLookUpOrder(inputStream, outputStream, user_id);
+                break;
+
+            case WRITE_REVIEW:
+                writeReviewController.handleWrite(sc, inputStream, outputStream, user_id);
                 break;
 
             case QUIT:
