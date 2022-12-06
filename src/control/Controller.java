@@ -23,6 +23,7 @@ public class Controller {
     LoginController loginController = new LoginController();
     OrderController orderController = new OrderController();
     EditInformationController editInformationController = new EditInformationController();
+    LookUpStoreController lookUpStoreController = new LookUpStoreController();
 
     String user_id = "user1";
 
@@ -42,11 +43,11 @@ public class Controller {
                 break;
 
             case EDIT_INFORMATION:
-                editInformationController.handleOrder(sc, inputStream, outputStream, user_id);
+                editInformationController.handleEdit(sc, inputStream, outputStream, user_id);
                 break;
 
             case INQUIRE_STORE:
-                //
+                lookUpStoreController.handleLookUp(inputStream, outputStream);
                 break;
 
             case ORDER:

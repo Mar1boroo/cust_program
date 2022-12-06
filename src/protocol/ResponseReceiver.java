@@ -403,4 +403,20 @@ public class ResponseReceiver {
 
         return storeDTOs;
     }
+
+    public List<StoreReviewDTO> receiveStoreReviewList(DataInputStream inputStream) throws IOException
+    {
+        Header header = Header.readHeader(inputStream);
+        byte[] body = new byte[header.length];
+        inputStream.read(body);
+        DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
+
+        List<StoreReviewDTO> storeReviewDTOS = new ArrayList<>();
+        int size = bodyReader.readInt();
+
+        for(int i = 0; i < size; i++)
+            storeReviewDTOS.add(StoreReviewDTO.read(bodyReader));
+
+        return storeReviewDTOS;
+    }
 }

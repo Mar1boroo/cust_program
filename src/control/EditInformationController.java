@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class EditInformationController {
 
-    public void handleOrder(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream, String user_id) throws IOException
+    public void handleEdit(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream, String user_id) throws IOException
     {
         sc.nextLine();
         while(true)
