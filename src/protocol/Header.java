@@ -26,6 +26,7 @@ public class Header implements MySerializableClass {
     public final static byte CODE_ORDER_CANCEL = 0x06;
     public final static byte CODE_ORDER_LIST_LOOKUP = 0x07;
     public final static byte CODE_WRITE_REVIEW = 0x08;
+    public final static byte CODE_EDIT_INFORMATION = 0x09;
 
     public final static byte CODE_ORDER_ACCEPT = 0x30;
     public final static byte CODE_REVIEW_LOOKUP = 0x31;

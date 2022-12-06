@@ -361,7 +361,7 @@ public class ResponseSender {
         outputStream.write(body);
     }
 
-    public void sendStoreSaleCountAns(StatisticalInfoDTO statisticalInfo, DataOutputStream outputStream) throws IOException {
+   /* public void sendStoreSaleCountAns(StatisticalInfoDTO statisticalInfo, DataOutputStream outputStream) throws IOException {
 
         BodyMaker bodyMaker = new BodyMaker();
         bodyMaker.add(statisticalInfo);
@@ -394,7 +394,9 @@ public class ResponseSender {
         outputStream.write(header.getBytes());
         outputStream.write(body);
     }
-*/
+
+     */
+
     public void sendStoreTimeAns(String time, DataOutputStream outputStream) throws IOException {
 
         BodyMaker bodyMaker = new BodyMaker();

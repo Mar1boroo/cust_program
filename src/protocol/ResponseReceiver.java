@@ -294,7 +294,7 @@ public class ResponseReceiver {
         String order_id = bodyReader.readUTF();
     }
 
-    public void receiveOrderList(DataInputStream inputStream) throws IOException {
+    /*public void receiveOrderList(DataInputStream inputStream) throws IOException {
         Header header = Header.readHeader(inputStream);
         byte[] body = new byte[header.length];
         inputStream.read(body);
@@ -386,6 +386,8 @@ public class ResponseReceiver {
 //
 //    }
 
+     */
+
     public List<StoreDTO> receiveStoreList(DataInputStream inputStream) throws IOException
     {
         Header header = Header.readHeader(inputStream);
@@ -401,6 +403,4 @@ public class ResponseReceiver {
 
         return storeDTOs;
     }
-
-
 }
