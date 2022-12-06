@@ -11,13 +11,21 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class SignUpController {
+    private ResponseSender responseSender;
+    private ResponseReceiver responseReceiver = new ResponseReceiver();
+    private RequestSender requestSender = new RequestSender();
+    private RequestReceiver requestReceiver = new RequestReceiver();
 
-    public void handleSignUp( Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
-        ResponseSender responseSender = new ResponseSender();
-        ResponseReceiver responseReceiver = new ResponseReceiver();
-        RequestSender requestSender = new RequestSender();
-        RequestReceiver requestReceiver = new RequestReceiver();
-        Scanner s = new Scanner(System.in);
+    public SignUpController()
+    {
+        this.responseSender = new ResponseSender();
+        this.responseReceiver = new ResponseReceiver();
+        this.requestSender = new RequestSender();
+        this.requestReceiver = new RequestReceiver();
+    }
+
+    public void handleSignUp(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
+
         String user_id;
 
         //시작 신호 보내기
@@ -26,21 +34,26 @@ public class SignUpController {
                 Header.CODE_SIGN_UP,
                 0);
         outputStream.write(startHeader.getBytes());
-        System.out.println("시작신호 보내기");
 
-        if(requestReceiver.receiveUserIDReq(inputStream)) //user아이디 요청 받기
-            responseSender.sendUserIDAns(s, outputStream);//user아이디 보내기
-        
-        if((user_id = requestReceiver.receiveUserInfoReq(inputStream)) != "") //user정보 요청 받기
-            responseSender.sendUserInfoAns(s,user_id, outputStream); //user정보 보내기
-        else
-            responseSender.sendUserIDAns(s, outputStream);
+        if(requestReceiver.receiveUserIDReq(inputStream)) //user_id 요청 받기
+        {
+            responseSender.sendUserIDAns(sc, outputStream);//user_id 보내기
+        }
+
+        while(true)
+        {
+            if((user_id = requestReceiver.receiveUserIDResultReq(inputStream)) != "")
+                break;
+
+            System.out.println("아이디가 중복됩니다.");
+            responseSender.sendUserIDAns(sc, outputStream);//user_id 보내기
+        }
+        responseSender.sendUserInfoAns(sc,user_id, outputStream);
 
         if(requestReceiver.receiveResultReq(inputStream))
             System.out.println("회원가입이 완료되었습니다.");
         else
             System.out.println("회원가입 실패.");
-
 
 
 /*
@@ -85,7 +98,7 @@ public class SignUpController {
         outputStream.write(userHeader.getBytes());
         outputStream.write(userBody);
 
- */
+*/
 
 
 

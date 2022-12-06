@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class UserInputManager {
     private Scanner sc;
 
-    public UserInputManager(Scanner scanner)
+    public UserInputManager()
     {
-        sc = scanner;
+        sc = new Scanner(System.in);
     }
     public UserDTO getAddUserInfo()
     {

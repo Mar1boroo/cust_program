@@ -16,16 +16,12 @@ public class StoreInputManager {
     {
         StoreDTO addStoreDTO = new StoreDTO();
 
-        System.out.println("================가게 요청================");
-
         String store_name = inputStore_Name(sc);
         String store_address = inputStore_Address(sc);
         String store_phone = inputStore_Phone(sc);
         int store_category = inputStore_Category(sc);
         String store_time = inputStore_Time(sc);
         String store_info = inputStore_info(sc);
-
-        System.out.println("=======================================");
 
         addStoreDTO.setStore_name(store_name);
         addStoreDTO.setStore_address(store_address);

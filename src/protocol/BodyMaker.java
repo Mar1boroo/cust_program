@@ -3,50 +3,66 @@ package protocol;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 public class BodyMaker {
 
-    ByteArrayOutputStream buf;
+    ByteArrayOutputStream buf = new ByteArrayOutputStream();
     DataOutputStream dos;
 
     public BodyMaker() {
-        buf = new ByteArrayOutputStream();
-        dos = new DataOutputStream(buf);
+        this.dos = new DataOutputStream(this.buf);
     }
 
-    public int getSize() {return buf.size();}
+    public int getSize() {return this.buf.size();}
 
     public void add(MySerializableClass object) throws IOException {
-        dos.write(object.getBytes());
+        this.dos.write(object.getBytes());
     }
 
     public void add(List<MySerializableClass> list) throws IOException {
 
-        dos.writeInt(list.size());
-        for(MySerializableClass object : list) dos.write(object.getBytes());
+        this.dos.writeInt(list.size());
+        Iterator var2 = list.iterator();
+
+        while(var2.hasNext()) {
+            MySerializableClass object = (MySerializableClass)var2.next();
+            this.dos.write(object.getBytes());
+        }
+
+    }
+
+    public void addStrList(List<String> list) throws IOException {
+        this.dos.writeInt(list.size());
+        Iterator var2 = list.iterator();
+
+        while(var2.hasNext()) {
+            String str = (String) var2.next();
+            this.dos.write(str.getBytes());
+        }
 
     }
 
     public void addIntBytes(int integer) throws IOException {
-        dos.writeInt(integer);
+        this.dos.writeInt(integer);
     }
 
     public void addStringBytes(String str) throws IOException {
-        dos.writeUTF(str);
+        this.dos.writeUTF(str);
     }
 
     public void addBooleanBytes(boolean bool) throws IOException {
-        dos.writeBoolean(bool);
+        this.dos.writeBoolean(bool);
     }
 
     public void addLongBytes(long longData) throws IOException {
-        dos.writeLong(longData);
+        this.dos.writeLong(longData);
     }
 
 
     public byte[] getBody() {
-        return buf.toByteArray();
+        return this.buf.toByteArray();
     }
 
 }
