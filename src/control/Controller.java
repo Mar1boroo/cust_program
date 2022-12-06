@@ -23,7 +23,7 @@ public class Controller {
     LoginController loginController = new LoginController();
     OrderController orderController = new OrderController();
 
-    String user_id;
+    String user_id = "user1";
 
     public boolean handleCommand(int command, Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
 
@@ -50,6 +50,7 @@ public class Controller {
 
             case ORDER:
                 orderController.handleOrder(sc, inputStream, outputStream, user_id);
+                break;
 
             case QUIT:
                 Header quitHeader = new Header(
@@ -64,8 +65,4 @@ public class Controller {
 
         return true;
     }
-
-
-
-
 }

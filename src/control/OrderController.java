@@ -23,8 +23,10 @@ public class OrderController {
 
         Header start_Header = new Header(Header.TYPE_START, Header.CODE_FOOD_ORDER, 0);
         outputStream.write(start_Header.getBytes());
+        System.out.println("시작요청 보냄");
 
         List<StoreDTO> storeList = responseReceiver.receiveStoreList(inputStream);
+        System.out.println("가게리스트 받아옴");
 
         long order_price = 0;
         int selectMenuNum = -1;
@@ -54,8 +56,11 @@ public class OrderController {
         } while (continueFlag == false);
 
         requestSender.storeMenuListReq(store_id, outputStream);
+        System.out.println("가게 아이디 보내줌!!!!!");
+
         List<MenuDTO> menuList = responseReceiver.receiveMenuList(inputStream);
         ArrayList<String> menuCategory = getMenuCategory(menuList);
+        System.out.println("메뉴 받아옴!!!!!!!!");
 
         int menuCnt = 0;
         while(selectMenuNum != 0)
@@ -76,8 +81,10 @@ public class OrderController {
                 order_price = order_price + menuList.get(selectMenuNum - 1).getMenu_price();
                 System.out.println();
 
+                System.out.println("메뉴 아이디 보내줌!!!!!");
                 requestSender.menuOptionListReq(menu_id, outputStream);
                 List<OptionDTO> optionList = responseReceiver.receiveOptionList(inputStream);
+                System.out.println("옵션 리스트 받아옴!!!!!");
 
                 if(optionList.size() != 0)
                 {
@@ -102,7 +109,17 @@ public class OrderController {
 
                 requestSender.updateMenuQuantity(menu_id, outputStream);
                 String menu_name = menuList.get(selectMenuNum - 1).getMenu_name();
-                insertOrderMenuAndOption(order_num, menu_name, menuCnt, optionNames);
+                String orderMenu_id = order_num + "-" + menuCnt;
+
+                OrderMenuDTO orderMenuDTO = new OrderMenuDTO(orderMenu_id, order_num, menu_name);
+                requestSender.insertOrderMenuReq(orderMenuDTO, outputStream);
+
+                OrderOptionDTO orderOptionDTO;
+                for(int j = 0; j < optionNames.size(); j++)
+                {
+                    orderOptionDTO = new OrderOptionDTO(orderMenu_id, optionNames.get(j));
+                    requestSender.insertOrderOptionReq(orderOptionDTO, outputStream);
+                }
                 System.out.println();
                 System.out.println(menu_name + "에 대한 주문이 완료되었습니다.");
                 System.out.println(); menuCnt++;
@@ -247,18 +264,6 @@ public class OrderController {
         for(int i = 0; i < options.size(); i++)
             result = result + optionList.get(options.get(i) - 1).getOption_price();
         return result;
-    }
-
-    public void insertOrderMenuAndOption(String order_num, String menu_name, int menuCnt, List<String> optionNames)
-    {
-        String orderMenu_id = order_num + "-" + menuCnt;
-        OrderMenuDTO orderMenuDTO = new OrderMenuDTO(orderMenu_id, order_num, menu_name);
-
-        OrderOptionDTO orderOptionDTO;
-        for(int j = 0; j < optionNames.size(); j++)
-        {
-            orderOptionDTO = new OrderOptionDTO(orderMenu_id, optionNames.get(j));
-        }
     }
 }
 

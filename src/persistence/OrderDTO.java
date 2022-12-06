@@ -109,7 +109,6 @@ public class OrderDTO implements MySerializableClass {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(buf);
 
-        dos.writeInt(order_id);
         dos.writeUTF(user_id);
         dos.writeInt(store_id);
         dos.writeLong(order_price);

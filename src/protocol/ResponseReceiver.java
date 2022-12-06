@@ -7,6 +7,7 @@ import persistence.StoreDTO;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseReceiver {
@@ -224,7 +225,7 @@ public class ResponseReceiver {
         inputStream.read(body);
         DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
 
-        List<MenuDTO> menuDTOs = null;
+        List<MenuDTO> menuDTOs = new ArrayList<>();
         int size = bodyReader.readInt();
 
         for(int i = 0; i < size; i++)
@@ -257,7 +258,7 @@ public class ResponseReceiver {
         inputStream.read(body);
         DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
 
-        List<OptionDTO> optionDTOs = null;
+        List<OptionDTO> optionDTOs = new ArrayList<>();
         int size = bodyReader.readInt();
 
         for(int i = 0; i < size; i++)
@@ -293,7 +294,7 @@ public class ResponseReceiver {
         String order_id = bodyReader.readUTF();
     }
 
-    public void receiveOrderList(DataInputStream inputStream) throws IOException {
+   /* public void receiveOrderList(DataInputStream inputStream) throws IOException {
         Header header = Header.readHeader(inputStream);
         byte[] body = new byte[header.length];
         inputStream.read(body);
@@ -320,6 +321,8 @@ public class ResponseReceiver {
             orderMenuDTOs.add(OrderMenuDTO.readOrderMenu(bodyReader));
         }
     }
+
+    */
 
     public void receiveReviewID(DataInputStream inputStream) throws IOException {
         Header header = Header.readHeader(inputStream);
@@ -392,7 +395,7 @@ public class ResponseReceiver {
         inputStream.read(body);
         DataInputStream bodyReader = new DataInputStream(new ByteArrayInputStream(body));
 
-        List<StoreDTO> storeDTOs = null;
+        List<StoreDTO> storeDTOs = new ArrayList<>();
         int size = bodyReader.readInt();
 
         for(int i = 0; i < size; i++)

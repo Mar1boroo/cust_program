@@ -36,7 +36,7 @@ public class RequestSender {
     public void insertOrderReq(OrderDTO order, DataOutputStream outputStream) throws IOException
     {
         BodyMaker bodyMaker = new BodyMaker();
-        bodyMaker.add((MySerializableClass) order);
+        bodyMaker.add(order);
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_ORDER, body.length);
@@ -47,7 +47,7 @@ public class RequestSender {
     public void insertOrderMenuReq(OrderMenuDTO orderMenu, DataOutputStream outputStream) throws IOException
     {
         BodyMaker bodyMaker = new BodyMaker();
-        bodyMaker.add((MySerializableClass) orderMenu);
+        bodyMaker.add(orderMenu);
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_ORDER_MENU, body.length);
@@ -58,7 +58,7 @@ public class RequestSender {
     public void insertOrderOptionReq(OrderOptionDTO orderOption, DataOutputStream outputStream) throws IOException
     {
         BodyMaker bodyMaker = new BodyMaker();
-        bodyMaker.add((MySerializableClass) orderOption);
+        bodyMaker.add(orderOption);
         byte[] body = bodyMaker.getBody();
 
         Header header = new Header(Header.TYPE_REQ, Header.CODE_INSERT_ORDER_OPTION, body.length);

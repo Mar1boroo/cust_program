@@ -30,7 +30,7 @@ public class LoginController {
         System.out.println("user_id 결과 받기");
 /*
         id_result_header.type = Header.CODE_
-*/
+
 
         byte[] id_Body = bodyMaker.getBody();
         Header userHeader = new Header(
@@ -38,6 +38,6 @@ public class LoginController {
                 Header.CODE_USER_ID,
                 id_Body.length);
         outputStream.write(userHeader.getBytes());
-        outputStream.write(id_Body);
+        outputStream.write(id_Body);*/
     }
 }

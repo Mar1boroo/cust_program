@@ -1,6 +1,5 @@
 package protocol;
 
-import inputManager.StoreInputManager;
 import inputManager.UserInputManager;
 import persistence.*;
 
@@ -337,25 +336,6 @@ public class ResponseSender {
     }
 
  */
-
-    public void sendStoreInfoAns(Scanner s, DataOutputStream outputStream) throws IOException { //가게 정보 입력 후 전송
-        StoreInputManager addStoreInfoManager = new StoreInputManager(s);
-        StoreDTO addStoreInfo = addStoreInfoManager.getAddStoreInfo();
-
-        BodyMaker bodyMaker = new BodyMaker();
-        bodyMaker.add(addStoreInfo);
-
-        byte[] body = bodyMaker.getBody();
-
-        Header header = new Header(
-                Header.TYPE_ANS,
-                Header.CODE_STORE_INFO,//임시 코드 가게 정보 전송
-                body.length
-        );
-
-        outputStream.write(header.getBytes());
-        outputStream.write(body);
-    }
 
     public void sendStoreSaleCountAns(StatisticalInfoDTO statisticalInfo, DataOutputStream outputStream) throws IOException {
 

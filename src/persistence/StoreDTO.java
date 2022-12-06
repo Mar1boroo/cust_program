@@ -123,7 +123,9 @@ public class StoreDTO implements MySerializableClass {
     public static StoreDTO read(DataInputStream bodyReader) throws IOException
     {
         int store_id = bodyReader.readInt();
+        System.out.println(store_id);
         String user_id = bodyReader.readUTF();
+        System.out.println(user_id);
         String store_name = bodyReader.readUTF();
         String store_phone = bodyReader.readUTF();
         String store_address = bodyReader.readUTF();
