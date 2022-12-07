@@ -1,4 +1,4 @@
-import control.Controller;
+import MenuControl.MainController;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,45 +12,28 @@ public class Main {
         Socket socket = new Socket("127.0.0.1", 3000);
         //192.168.227.206
 
-        System.out.println("connected.");
+        System.out.println("연결되었습니다.");
 
         DataInputStream is = new DataInputStream(socket.getInputStream());
         DataOutputStream os = new DataOutputStream(socket.getOutputStream());
-
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("======================================");
-        System.out.println("=============고객 프로그램==============");
-        System.out.println("======================================");
-
         boolean isContinue = true;
-
-        Controller controller = new Controller();
+        MainController mainController = new MainController(socket);
 
         while(isContinue) {
-
             int command;
-
+            System.out.println();
+            System.out.println("==================메인 메뉴=================");
             System.out.println("1. 회원가입");
             System.out.println("2. 로그인");
-            System.out.println("3. 개인 정보 및 비밀번호 수정");
-            System.out.println("4. 음식점 조회");
-            System.out.println("5. 음식 주문");
-            System.out.println("6. 주문 취소");
-            System.out.println("7. 주문 내역 조회");
-            System.out.println("8. 리뷰와 별점 등록");
-            System.out.println("9. 종료");
-            System.out.println("======================================");
+            System.out.println("3. 종료");
+            System.out.println("==========================================");
             System.out.print("메뉴를 선택하세요 : ");
             command = sc.nextInt();
 
-            isContinue = controller.handleCommand(command, sc, is, os);
-
-            System.out.println("======================================");
-
-
-        } // end of while
-
-
+            System.out.println();
+            isContinue = mainController.handleMainCommand(command, sc, is, os);
+        }
     } // end of main
 }

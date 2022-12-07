@@ -1,4 +1,4 @@
-package control;
+package functionControl;
 
 import persistence.UserDTO;
 import protocol.*;
@@ -22,7 +22,7 @@ public class LoginController {
         this.requestReceiver = new RequestReceiver();
     }
 
-    public String handleLogin(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
+    public UserDTO handleLogin(Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
         UserDTO loginUser;
         String user_id = "";
         //시작 신호 보내기
@@ -56,6 +56,6 @@ public class LoginController {
         }
 
         System.out.println(loginUser.getUser_name() + "(" + loginUser.getUser_id() + ")" + "님 로그인 되셨습니다.");
-        return loginUser.getUser_id();
+        return loginUser;
     }
 }

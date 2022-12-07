@@ -6,6 +6,7 @@ import lombok.ToString;
 import protocol.MySerializableClass;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -102,6 +103,21 @@ public class ReviewDTO implements MySerializableClass {
         this.review_time=review_time;
         this.order_num=order_num;
         this.review_comment = 0;
+    }
+
+    public static ReviewDTO read(DataInputStream bodyReader) throws IOException
+    {
+        int review_id = bodyReader.readInt();
+        int store_id = bodyReader.readInt();
+        String user_id = bodyReader.readUTF();
+        int order_id = bodyReader.readInt();
+        int review_rate = bodyReader.readInt();
+        String review_content = bodyReader.readUTF();
+        String review_time = bodyReader.readUTF();
+        String order_num = bodyReader.readUTF();
+        int review_comment = bodyReader.readInt();
+
+        return new ReviewDTO(store_id, user_id, order_id, review_rate, review_content, LocalDateTime.now(), order_num);
     }
 
     @Override

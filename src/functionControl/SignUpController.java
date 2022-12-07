@@ -1,13 +1,11 @@
-package control;
+package functionControl;
 
 import protocol.*;
 import persistence.UserDTO;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class SignUpController {

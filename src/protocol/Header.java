@@ -20,7 +20,7 @@ public class Header implements MySerializableClass {
     //TYPE : 0x00 (START) 일 때
     public final static byte CODE_SIGN_UP = 0x01;
     public final static byte CODE_LOG_IN = 0x02;
-    public final static byte CODE_INFO_AND_PW_FIX= 0x03;
+    public final static byte CODE_INFO_AND_PW_FIX = 0x03;
     public final static byte CODE_STORE_LOOKUP = 0x04;
     public final static byte CODE_FOOD_ORDER = 0x05;
     public final static byte CODE_ORDER_CANCEL = 0x06;
@@ -30,37 +30,62 @@ public class Header implements MySerializableClass {
     public final static byte CODE_ORDER_ACCEPT = 0x30;
     public final static byte CODE_REVIEW_LOOKUP = 0x31;
     public final static byte CODE_STATISTICS = 0x32;
-    public final static byte CODE_USER_ACCEPT=0x33;
+    public final static byte CODE_USER_ACCEPT = 0x33;
+    public final static byte CODE_STORE_ACCEPT = 0x34;
+    public final static byte CODE_MENU_ACCEPT = 0x35;
 
     //TYPE : 0x01(REQUEST) or 0x02(ANSWER) 일 때
     public final static byte CODE_USER_ID = 0x01;
-    public final static byte CODE_USER_PW = 0x02;public final static byte CODE_USER_NAME = 0x03;
+    public final static byte CODE_USER_PW = 0x02;
+    public final static byte CODE_USER_NAME = 0x03;
     public final static byte CODE_USER_ADDRESS = 0x04;
-    public final static byte CODE_USER_CATEGORY = 0x05; public final static byte CODE_CUSTOMER_PHONE = 0x06;
-    public final static byte CODE_STORE_ID = 0x08; public final static byte CODE_STORE_ADDRESS = 0x0A;
-    public final static byte CODE_STORE_PHONE = 0x0B; public final static byte CODE_STORE_CATEGORY = 0x0C;
-    public final static byte CODE_STORE_STATE = 0x0D; public final static byte CODE_STORE_OPEN = 0x0E;
-    public final static byte CODE_STORE_CLOSE = 0x0F; public final static byte CODE_STORE_INTRODUCE = 0x10;
-    public final static byte CODE_MENU_LIST = 0x11; public final static byte CODE_MENU_ID = 0x12;
-    public final static byte CODE_MENU_NAME = 0x13; public final static byte CODE_MENU_PRICE = 0x14;
-    public final static byte CODE_MENU_STOCK = 0x15; public final static byte CODE_MENU_CATEGORY = 0x16;
-    public final static byte CODE_OPTION_REQ = 0x17; public final static byte CODE_OPTION_LIST = 0x18;
-    public final static byte CODE_OPTION_ID = 0x19; public final static byte CODE_OPTION_PRICE = 0x32;
-    public final static byte CODE_ORDER_LIST = 0x1A; public final static byte CODE_ORDER_ID = 0x1B;
-    public final static byte CODE_ORDER_STATE = 0x1D; public final static byte CODE_ORDER_MENU_LIST = 0x1E;
-    public final static byte CODE_ORDER_PRICE = 0x1F; public final static byte CODE_GRADE = 0x20;
-    public final static byte CODE_REVIEW_CONTENT = 0x21; public final static byte CODE_REVIEW_LIST = 0x22;
-    public final static byte CODE_REVIEW_ID = 0x23; public final static byte CODE_REVIEW_ANS = 0x24;
-    public final static byte CODE_APPROVAL = 0x25; public final static byte CODE_DISCOUNT_RATE = 0x26;
-    public final static byte CODE_MODIFY_LIST =0x27 ;   public final static byte CODE_MODIFY_INFO = 0x28;
-    public final static byte CODE_CHANGE_LIST = 0x29; public final static byte CODE_CATEGORY_INFO = 0x2A;
-    public final static byte CODE_SELECTED_CATEGORY = 0x2B ;   public final static byte CODE_KEEPER_SALES = 0x2C;
-    public final static byte CODE_STORE_NUMBER_OF_SALE = 0x2D;   public final static byte CODE_STORE_SALES = 0x2E;
-    public final static byte CODE_STORE_OPENING_HOURS = 0x2F ;   public final static byte CODE_STATISTICS_LIST = 0x30;
+    public final static byte CODE_USER_CATEGORY = 0x05;
+    public final static byte CODE_CUSTOMER_PHONE = 0x06;
+    public final static byte CODE_STORE_ID = 0x08;
+    public final static byte CODE_STORE_ADDRESS = 0x0A;
+    public final static byte CODE_STORE_PHONE = 0x0B;
+    public final static byte CODE_STORE_CATEGORY = 0x0C;
+    public final static byte CODE_STORE_STATE = 0x0D;
+    public final static byte CODE_STORE_OPEN = 0x0E;
+    public final static byte CODE_STORE_CLOSE = 0x0F;
+    public final static byte CODE_STORE_INTRODUCE = 0x10;
+    public final static byte CODE_MENU_LIST = 0x11;
+    public final static byte CODE_MENU_ID = 0x12;
+    public final static byte CODE_MENU_NAME = 0x13;
+    public final static byte CODE_MENU_PRICE = 0x14;
+    public final static byte CODE_MENU_STOCK = 0x15;
+    public final static byte CODE_MENU_CATEGORY = 0x16;
+    public final static byte CODE_OPTION_REQ = 0x17;
+    public final static byte CODE_OPTION_LIST = 0x18;
+    public final static byte CODE_OPTION_ID = 0x19;
+    public final static byte CODE_OPTION_PRICE = 0x32;
+    public final static byte CODE_ORDER_LIST = 0x1A;
+    public final static byte CODE_ORDER_ID = 0x1B;
+    public final static byte CODE_ORDER_STATE = 0x1D;
+    public final static byte CODE_ORDER_MENU_LIST = 0x1E;
+    public final static byte CODE_ORDER_PRICE = 0x1F;
+    public final static byte CODE_GRADE = 0x20;
+    public final static byte CODE_REVIEW_CONTENT = 0x21;
+    public final static byte CODE_REVIEW_LIST = 0x22;
+    public final static byte CODE_REVIEW_ID = 0x23;
+    public final static byte CODE_REVIEW_ANS = 0x24;
+    public final static byte CODE_APPROVAL = 0x25;
+    public final static byte CODE_DISCOUNT_RATE = 0x26;
+    public final static byte CODE_MODIFY_LIST = 0x27;
+    public final static byte CODE_MODIFY_INFO = 0x28;
+    public final static byte CODE_CHANGE_LIST = 0x29;
+    public final static byte CODE_CATEGORY_INFO = 0x2A;
+    public final static byte CODE_SELECTED_CATEGORY = 0x2B;
+    public final static byte CODE_KEEPER_SALES = 0x2C;
+    public final static byte CODE_STORE_NUMBER_OF_SALE = 0x2D;
+    public final static byte CODE_STORE_SALES = 0x2E;
+    public final static byte CODE_STORE_OPENING_HOURS = 0x2F;
+    public final static byte CODE_STATISTICS_LIST = 0x30;
     public final static byte CODE_STORE_LIST = 0x40;
     public final static byte CODE_FIXED_ORDER_DTO = 0x41;
-
     public final static byte CODE_REVIEW_REPLY = 0x42;
+    public final static byte CODE_REPLY_CONTENTS = 0x43;
+
     public final static byte CODE_USER_DTO = 0x50;
     public final static byte CODE_USER_INFO = 0x51;
     public final static byte CODE_STORE_INFO = 0x52;
@@ -70,9 +95,25 @@ public class Header implements MySerializableClass {
     public final static byte CODE_INSERT_ORDER_MENU = 0x56;
     public final static byte CODE_INSERT_ORDER_OPTION = 0x57;
     public final static byte CODE_USER_LIST = 0x58;
+    public final static byte CODE_INSERT_MENU = 0x59;
+    public final static byte CODE_MENU_INFO = 0x5A;
     public final static byte CODE_UPDATE_USER_INFO = 0x5B;
+    public final static byte CODE_UPDATE_STORE_TIME = 0x5C;
+    public final static byte CODE_INSERT_MENU_OPTION = 0x5D;
+    public final static byte CODE_MENU_OPTION = 0x5E;
     public final static byte CODE_CANCEL_ORDER = 0x5F;
     public final static byte CODE_INSERT_REVIEW = 0x60;
+    public final static byte CODE_ACCEPT_USER_ID = 0x61;
+    public final static byte CODE_HOW_ACCEPT_USER = 0x62;
+    public final static byte CODE_ACCEPT_USER_NUM = 0x63;
+    public final static byte CODE_ACCEPT_STORE_NUM = 0x64;
+    public static final byte CODE_ACCEPT_STORE_ID = 0x65;
+    public static final byte CODE_HOW_ACCEPT_STORE = 0x66;
+    public static final byte CODE_ACCEPT_MENU_NUM = 0x67;
+    public static final byte CODE_ACCEPT_MENU_ID = 0x68;
+    public static final byte CODE_HOW_ACCEPT_MENU = 0x69;
+    public static final byte CODE_REQUEST_RECEIVE_ACCEPT_USER_NUM = 0x6A;
+    public static final byte CODE_REQUEST_RECEIVE_ACCEPT_STORE_NUM = 0x6B;
 
 
     //TYPE : 0x03(RESULT) 일 때
@@ -97,7 +138,6 @@ public class Header implements MySerializableClass {
         int length = dis.readInt();
 
         return new Header(type, code, length);
-
     }
 
 

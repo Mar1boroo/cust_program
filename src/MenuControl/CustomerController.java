@@ -1,5 +1,6 @@
-package control;
+package MenuControl;
 
+import functionControl.*;
 import protocol.*;
 
 import java.io.DataInputStream;
@@ -7,20 +8,16 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Controller {
+public class CustomerController {
 
-    public static final int SIGN_UP = 1;
-    public static final int LOG_IN = 2;
-    public static final int EDIT_INFORMATION = 3;
-    public static final int INQUIRE_STORE = 4;
-    public static final int ORDER = 5;
-    public static final int ORDER_CANCLE = 6;
-    public static final int INQUIRE_ORDER = 7;
-    public static final int WRITE_REVIEW = 8;
-    public static final int QUIT = 9;
+    public static final int EDIT_INFORMATION = 1;
+    public static final int INQUIRE_STORE = 2;
+    public static final int ORDER = 3;
+    public static final int INQUIRE_ORDER = 4;
+    public static final int ORDER_CANCLE = 5;
+    public static final int WRITE_REVIEW = 6;
+    public static final int QUIT = 7;
 
-    SignUpController signUpController = new SignUpController();
-    LoginController loginController = new LoginController();
     OrderController orderController = new OrderController();
     EditInformationController editInformationController = new EditInformationController();
     LookUpStoreController lookUpStoreController = new LookUpStoreController();
@@ -28,23 +25,10 @@ public class Controller {
     OrderCancelController orderCancelController = new OrderCancelController();
     WriteReviewController writeReviewController = new WriteReviewController();
 
-    String user_id = "user1";
-
-    public boolean handleCommand(int command, Scanner sc, DataInputStream inputStream, DataOutputStream outputStream) throws IOException {
-
-        ResponseReceiver resReceiver = new ResponseReceiver();
-        RequestSender reqSender = new RequestSender();
+    public boolean handleCommand(int command, Scanner sc, DataInputStream inputStream, DataOutputStream outputStream, String user_id) throws IOException {
 
         switch(command)
         {
-            case SIGN_UP:
-                signUpController.handleSignUp(sc,inputStream, outputStream);
-                break;
-
-            case LOG_IN:
-                loginController.handleLogin(sc,inputStream, outputStream);
-                break;
-
             case EDIT_INFORMATION:
                 editInformationController.handleEdit(sc, inputStream, outputStream, user_id);
                 break;
@@ -75,11 +59,10 @@ public class Controller {
                         (byte) 0,
                         0);
                 outputStream.write(quitHeader.getBytes());
-                System.out.println("종료합니다.");
+                System.out.println("프로그램을 종료합니다.");
+                System.exit(0);
                 return false;
-
         }
-
         return true;
     }
 }

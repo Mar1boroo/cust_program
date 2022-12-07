@@ -1,4 +1,4 @@
-package control;
+package functionControl;
 
 import persistence.UserDTO;
 import protocol.BodyMaker;
